@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MovieDescriptionActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        tools:context=".MovieDescriptionActivity">
+
+        <ImageView
+            android:id="@+id/poster_desc"
+            android:layout_width="125dp"
+            android:layout_height="175dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/movie_poster" />
+
+        <TextView
+            android:id="@+id/title_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="140dp"
+            android:text="Forrest Gump"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:letterSpacing="0.2"
+            app:layout_constraintStart_toEndOf="@+id/poster_desc"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="DIRECTED BY"
+            android:textSize="16sp"
+            android:textStyle="italic"
+            app:layout_constraintStart_toEndOf="@+id/poster_desc"
+            app:layout_constraintTop_toBottomOf="@+id/title_desc" />
+
+        <TextView
+            android:id="@+id/directer_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Andy Serkis"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/textView2"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <TextView
+            android:id="@+id/year_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="2021"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/poster_desc"
+            app:layout_constraintTop_toBottomOf="@+id/directer_desc" />
+
+        <TextView
+            android:id="@+id/time_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="145 mins"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/year_desc"
+            app:layout_constraintStart_toEndOf="@+id/year_desc"
+            app:layout_constraintTop_toTopOf="@+id/year_desc" />
+
+        <Button
+            android:id="@+id/trailer_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trailer"
+            app:layout_constraintBottom_toBottomOf="@+id/time_desc"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            app:layout_constraintTop_toTopOf="@+id/time_desc"
+            app:layout_constraintVertical_bias="0.551" />
+
+        <TextView
+            android:id="@+id/description_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="After finding a host body in investigative reports Eddie Brock, the alien symboie must face a new enemy, Carnage, the alter ego of serial killer Clteus Kasady."
+            app:layout_constraintEnd_toEndOf="parent"
+            android:letterSpacing="0.15"
+            android:textSize="15sp"
+            android:lineHeight="25dp"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trailer_desc" />
+
+        <RatingBar
+            android:id="@+id/ratings_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:rating="3.5"
+            android:isIndicator="true"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Ratings"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description_desc" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Reviews"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ratings_desc" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reviews_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
