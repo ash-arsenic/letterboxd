@@ -26,7 +26,7 @@ public class ReviewsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_reviews, container, false);
 
-        reviews = Database.getReviews();
+        reviews = new ArrayList<>();
         adapter = new ReviewsAdapter(reviews);
         RecyclerView reviewsList = view.findViewById(R.id.reviews_rv);
         reviewsList.setHasFixedSize(true);

@@ -29,6 +29,7 @@ public class MovieDescriptionActivity extends AppCompatActivity {
     private Button trailer;
     private RecyclerView reviews;
     private ImageView poster;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,10 +43,10 @@ public class MovieDescriptionActivity extends AppCompatActivity {
         title.setText(movie.getTitle());
 
         year = findViewById(R.id.year_desc);
-        year.setText(movie.getYear());
+//        year.setText(movie.getYear());
 
         poster = findViewById(R.id.poster_desc);
-        Picasso.get().load(movie.getPoster()).into(poster);
+        Picasso.get().load(movie.getPosterPath()).into(poster);
 
         time = findViewById(R.id.time_desc);
         director = findViewById(R.id.directer_desc);

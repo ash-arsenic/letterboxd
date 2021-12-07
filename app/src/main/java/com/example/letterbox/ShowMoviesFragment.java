@@ -26,17 +26,21 @@ public class ShowMoviesFragment extends Fragment {
 
     private ArrayList<MovieModal> movies;
     private MovieListAdapter adapter;
+
+    public ShowMoviesFragment(ArrayList<MovieModal> movies) {
+        this.movies = movies;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_show_movies, container, false);
-        movies = Database.getData();
 
         adapter = new MovieListAdapter(movies);
         RecyclerView moviesList = view.findViewById(R.id.movies_rv);
         moviesList.setHasFixedSize(true);
-        moviesList.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        moviesList.setLayoutManager(new GridLayoutManager(getContext(), 4));
         moviesList.setAdapter(adapter);
         return view;
     }
@@ -59,9 +63,7 @@ public class ShowMoviesFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull MovieListViewHolder holder, @SuppressLint("RecyclerView") int position) {
-            holder.movieTitle.setText(movies.get(position).getTitle());
-            holder.movieYear.setText(movies.get(position).getYear());
-            Picasso.get().load(movies.get(position).getPoster()).into(holder.moviePoster);
+            Picasso.get().load(movies.get(position).getPosterPath()).into(holder.moviePoster);
             holder.movie.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -69,6 +71,7 @@ public class ShowMoviesFragment extends Fragment {
                     Gson gson = new Gson();
                     intent.putExtra("MOVIE", gson.toJson(movies.get(position)));
                     startActivity(intent);
+
                 }
             });
         }
@@ -81,14 +84,11 @@ public class ShowMoviesFragment extends Fragment {
 
     private class MovieListViewHolder extends RecyclerView.ViewHolder {
         ImageView moviePoster;
-        TextView movieTitle, movieYear;
         LinearLayout movie;
         public MovieListViewHolder(@NonNull View itemView) {
             super(itemView);
 
             moviePoster = itemView.findViewById(R.id.movie_poster);
-            movieTitle = itemView.findViewById(R.id.movie_title);
-            movieYear = itemView.findViewById(R.id.movie_year);
             movie = itemView.findViewById(R.id.movie_layout);
         }
     }

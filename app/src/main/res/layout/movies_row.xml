@@ -2,30 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:background="@drawable/movie_background"
-    android:padding="6dp"
     android:id="@+id/movie_layout"
+    android:layout_marginVertical="2dp"
     android:gravity="center_horizontal"
-    android:layout_marginVertical="12dp"
     android:layout_height="wrap_content">
     <ImageView
-        android:layout_width="125dp"
-        android:layout_height="175dp"
-        android:scaleType="centerCrop"
+        android:layout_width="150dp"
+        android:layout_height="140dp"
         android:src="@drawable/movie_poster"
         android:id="@+id/movie_poster"/>
-    <TextView
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:text="Forrest Gump"
-        android:layout_marginTop="6dp"
-        style="@style/movie_title"
-        android:id="@+id/movie_title"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="2021"
-        style="@style/movie_year"
-        android:id="@+id/movie_year"/>
 </LinearLayout>
