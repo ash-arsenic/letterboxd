@@ -34,6 +34,7 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<MovieModal> movies;
+    private ArrayList<ReviewModal> reviews;
     private ViewPager viewPager;
     private TabLayout tabLayout;
     public static final String URL = "https://api.themoviedb.org/3/movie/popular?api_key=314778b919b218a848acfcee10a6c785";
@@ -52,11 +53,15 @@ public class MainActivity extends AppCompatActivity {
         if(movies == null) {
             movies = new ArrayList<>();
         }
+
+        type = new TypeToken<ArrayList<ReviewModal>>() {}.getType();
+        reviews = gson.fromJson(getIntent().getStringExtra("REVIEWS"), type);
+//        Log.d("MOVIE_D", reviews.get(0).getReview());
 //        loadData();
 
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(new ShowMoviesFragment(movies));
-        fragments.add(new ReviewsFragment());
+        fragments.add(new ReviewsFragment(reviews));
         ArrayList<String> tabNames = new ArrayList<>();
         tabNames.add("FILMS");
         tabNames.add("REVIEWS");

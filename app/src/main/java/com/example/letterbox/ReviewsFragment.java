@@ -20,13 +20,15 @@ import java.util.ArrayList;
 public class ReviewsFragment extends Fragment {
     private ArrayList<ReviewModal> reviews;
     private ReviewsAdapter adapter;
+    public ReviewsFragment(ArrayList<ReviewModal> reviews) {
+        this.reviews = reviews;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_reviews, container, false);
 
-        reviews = new ArrayList<>();
         adapter = new ReviewsAdapter(reviews);
         RecyclerView reviewsList = view.findViewById(R.id.reviews_rv);
         reviewsList.setHasFixedSize(true);

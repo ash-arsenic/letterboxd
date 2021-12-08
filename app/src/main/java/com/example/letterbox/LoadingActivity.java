@@ -26,6 +26,7 @@ import okhttp3.Response;
 
 public class LoadingActivity extends AppCompatActivity {
     private ArrayList<MovieModal> movies;
+    private ArrayList<ReviewModal> reviewModals;
     public static final String MOVIES = "MOVIES";
 
     public static final String API_START = "https://api.themoviedb.org/3/movie/";
@@ -38,6 +39,7 @@ public class LoadingActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         movies = new ArrayList<>();
+        reviewModals = new ArrayList<>();
 
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder().url(API_START+"top_rated"+API_END).build();
@@ -83,13 +85,66 @@ public class LoadingActivity extends AppCompatActivity {
                         MovieModal movie = new MovieModal(adult, backdropPath, genreIds, id, originalLanguage, originalTitle, overview, popularity, posterPath, releaseDate, title, video, voteAverage, voteCount);
                         movies.add(movie);
                     }
+
+                    final int[] i = {0};
+                    final int[] currentId = {0};
+                    while (i[0] < movies.size()) {
+                        MovieModal modal = movies.get(i[0]);
+                        if(currentId[0] == modal.getId()) {
+                            continue;
+                        }
+                        currentId[0] = modal.getId();
+                        OkHttpClient okHttpClient = new OkHttpClient();
+                        Request request = new Request.Builder().url(API_START+String.valueOf(modal.getId())+"/reviews"+API_END).build();
+                        okHttpClient.newCall(request).enqueue(new Callback() {
+                            @Override
+                            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                                Toast.makeText(LoadingActivity.this, "No network", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                                String reviews = response.body().string();
+                                JSONObject reviewObject = null;
+                                try {
+                                    reviewObject = new JSONObject(reviews);
+                                    JSONArray reviewJsonArray = reviewObject.getJSONArray("results");
+                                    for(int j=0; j<reviewJsonArray.length(); j++) {
+                                        JSONObject obj = reviewJsonArray.getJSONObject(j);
+                                        String username = obj.getString("author");
+                                        String review = obj.getString("content");
+                                        String rating="9.0";
+                                        try {
+                                            rating = String.valueOf(obj.getJSONObject("author_details").getDouble("rating"));
+                                        }catch(JSONException e) {
+
+                                        }
+                                        if(rating.equals("")) {
+                                            rating = "9.0";
+                                        }
+                                        reviewModals.add(new ReviewModal(modal.getPosterPath(), modal.getTitle(), modal.getReleaseDate(), String.valueOf(rating), username, review));
+                                        currentId[0] = modal.getId();
+
+                                        i[0]++;
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                    Toast.makeText(LoadingActivity.this, "Some Error Occurred", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            }
+                        });
+                    }
+                    Log.d("MOVIE_D", String.valueOf(reviewModals.size()));
                     Intent intent = new Intent(LoadingActivity.this, MainActivity.class);
                     Gson gson = new Gson();
                     intent.putExtra(MOVIES, gson.toJson(movies));
+                    intent.putExtra("REVIEWS", gson.toJson(reviewModals));
                     startActivity(intent);
                     finish();
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(LoadingActivity.this, "Some error occurred", Toast.LENGTH_SHORT).show();
                 }
             }
         });

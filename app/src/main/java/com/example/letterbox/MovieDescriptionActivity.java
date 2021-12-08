@@ -112,19 +112,15 @@ public class MovieDescriptionActivity extends AppCompatActivity {
             Picasso.get().load(imageList.get(0)).into(movieBanner);
 
             FloatingActionButton watchMovieButton = findViewById(R.id.watch_movie);
-            if(homepage.equals("")) {
-                watchMovieButton.setEnabled(false);
-            } else {
-                watchMovieButton.setEnabled(true);
-                watchMovieButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(homepage));
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                    }
-                });
-            }
+            watchMovieButton.setEnabled(true);
+            watchMovieButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.imdb.com/title/"+imdbId+"/?ref_=nv_sr_srsg_0"));
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+            });
 
             // Rest of the page
             TextView director = findViewById(R.id.director_name);
