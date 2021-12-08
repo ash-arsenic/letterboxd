@@ -67,11 +67,13 @@ public class ShowMoviesFragment extends Fragment {
             holder.movie.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getContext(), MovieDescriptionActivity.class);
-                    Gson gson = new Gson();
-                    intent.putExtra("MOVIE", gson.toJson(movies.get(position)));
+//                    Intent intent = new Intent(getContext(), MovieDescriptionActivity.class);
+//                    Gson gson = new Gson();
+//                    intent.putExtra("MOVIE", gson.toJson(movies.get(position)));
+//                    startActivity(intent);
+                    Intent intent = new Intent(getContext(), LoadMovieDetailsActivity.class);
+                    intent.putExtra("MOVIE_ID", movies.get(position).getId());
                     startActivity(intent);
-
                 }
             });
         }
