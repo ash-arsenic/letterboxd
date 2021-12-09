@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-            app:contentScrim="@color/purple_500"
+            app:contentScrim="@color/primaryColor"
             android:id="@+id/toolbar"
             app:title="@string/app_name"
             >

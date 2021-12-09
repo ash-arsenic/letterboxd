@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "666147194413",
+    "project_id": "letterbox-a2a7d",
+    "storage_bucket": "letterbox-a2a7d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666147194413:android:4513ca3cb01c3c09f1daa4",
+        "android_client_info": {
+          "package_name": "com.example.letterbox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666147194413-fs8uo409fvp9ihi0k2od4qiibgt9euo1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnvZfgRi8ohcZYjeIsGXAn-JgcPqoUcqM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "666147194413-fs8uo409fvp9ihi0k2od4qiibgt9euo1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
