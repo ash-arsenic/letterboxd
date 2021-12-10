@@ -4,13 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
@@ -34,18 +38,41 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<MovieModal> movies;
-    private ArrayList<ReviewModal> reviews;
-    private ViewPager viewPager;
-    private TabLayout tabLayout;
+    private ArrayList<MovieModal> topRated;
+    private ArrayList<MovieModal> latest;
+    private ArrayList<MovieModal> upcoming;
     public static final String URL = "https://api.themoviedb.org/3/movie/popular?api_key=314778b919b218a848acfcee10a6c785";
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.watchlist_pp:
+                Intent intent = new Intent(MainActivity.this, MyWatchlistActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        this.getSupportActionBar().hide();
+        Toolbar toolbar = findViewById(R.id.toolbar_main);
+        toolbar.setTitle(R.string.app_name);
+        setSupportActionBar(toolbar);
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        viewPager = findViewById(R.id.viewPager);
-        tabLayout = findViewById(R.id.tabLayout);
+        ViewPager viewPager = findViewById(R.id.viewPager);
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
 
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<MovieModal>>() {}.getType();
@@ -53,18 +80,32 @@ public class MainActivity extends AppCompatActivity {
         if(movies == null) {
             movies = new ArrayList<>();
         }
+        topRated = gson.fromJson(getIntent().getStringExtra("TOP_RATED"), type);
+        if(topRated == null) {
+            topRated = new ArrayList<>();
+        }
+        latest = gson.fromJson(getIntent().getStringExtra("LATEST"), type);
+        if(latest == null) {
+            latest = new ArrayList<>();
+        }
+        upcoming = gson.fromJson(getIntent().getStringExtra("UPCOMING"), type);
+        if(upcoming == null) {
+            upcoming = new ArrayList<>();
+        }
 
         type = new TypeToken<ArrayList<ReviewModal>>() {}.getType();
-        reviews = gson.fromJson(getIntent().getStringExtra("REVIEWS"), type);
-//        Log.d("MOVIE_D", reviews.get(0).getReview());
-//        loadData();
+        ArrayList<ReviewModal> reviews = gson.fromJson(getIntent().getStringExtra("REVIEWS"), type);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(new ShowMoviesFragment(movies));
-        fragments.add(new ReviewsFragment(reviews));
+        fragments.add(new ShowMoviesFragment(topRated));
+        fragments.add(new ShowMoviesFragment(latest));
+        fragments.add(new ShowMoviesFragment(upcoming));
         ArrayList<String> tabNames = new ArrayList<>();
-        tabNames.add("FILMS");
-        tabNames.add("REVIEWS");
+        tabNames.add("POPULAR");
+        tabNames.add("TOP RATED");
+        tabNames.add("LATEST");
+        tabNames.add("UPCOMING");
 
         viewPager.setAdapter(new MovieListAdapter(getSupportFragmentManager(), fragments, tabNames));
         tabLayout.setupWithViewPager(viewPager);

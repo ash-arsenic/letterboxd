@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/review_border"
+    android:id="@+id/watchlist_movie"
+    android:padding="20dp">
+
+    <ImageView
+        android:id="@+id/movie_poster_w"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/movie_poster" />
+
+    <TextView
+        android:id="@+id/movie_title_w"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Forrest Gump"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/heading"
+        app:layout_constraintStart_toEndOf="@+id/movie_poster_w"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ratings_w"
+        style="@style/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/ic_baseline_star_rate_24"
+        android:text="5"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="26dp"
+        app:layout_constraintStart_toEndOf="@+id/movie_poster_w"
+        app:layout_constraintTop_toBottomOf="@+id/movie_year_w" />
+
+    <TextView
+        android:id="@+id/movie_year_w"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2021"
+        style="@style/heading"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintStart_toEndOf="@+id/movie_poster_w"
+        app:layout_constraintTop_toBottomOf="@+id/movie_title_w" />
+</androidx.constraintlayout.widget.ConstraintLayout>

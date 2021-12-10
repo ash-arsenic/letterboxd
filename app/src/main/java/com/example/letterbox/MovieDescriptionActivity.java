@@ -1,6 +1,8 @@
 package com.example.letterbox;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -22,12 +24,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class MovieDescriptionActivity extends AppCompatActivity {
@@ -42,11 +47,11 @@ public class MovieDescriptionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_description);
-        this.getSupportActionBar().hide();
+//        this.getSupportActionBar().hide();
         String str = getIntent().getStringExtra("MOVIE");
         String images = getIntent().getStringExtra("IMAGES");
         String reviews = getIntent().getStringExtra("REVIEWS");
-        Log.d("MOVIE_D", reviews);
+
         imageList = new ArrayList<>();
         genres = new ArrayList<>();
         reviewModals = new ArrayList<>();
@@ -135,13 +140,15 @@ public class MovieDescriptionActivity extends AppCompatActivity {
             ImageView posterIV = findViewById(R.id.movie_poster_d);
             Picasso.get().load(posterPath).into(posterIV);
 
-            Button trailer = findViewById(R.id.trailer_d);
-            trailer.setOnClickListener(new View.OnClickListener() {
+            Button addToWatchlist = findViewById(R.id.trailer_d);
+            addToWatchlist.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://youtu.be/-FmWuCgJmxo"));
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    LoadingActivity.watchList.add(new MovieModal(adult, backdropPath, null, (int) id, originalLanguage, originalTitle, overview, popularity, posterPath, releaseDate, title, "", String.valueOf(voteAverage), String.valueOf(voteCount)));
+                    saveList();
+                    Toast.makeText(MovieDescriptionActivity.this, title+" added", Toast.LENGTH_LONG).show();
+//                    Intent intent = new Intent(MovieDescriptionActivity.this, MyWatchlistActivity.class);
+//                    startActivity(intent);
                 }
             });
 
@@ -323,4 +330,13 @@ public class MovieDescriptionActivity extends AppCompatActivity {
             movieRatings = itemView.findViewById(R.id.ratings_sub);
         }
     }
+    public void saveList() {
+        SharedPreferences sharedPreferences = getSharedPreferences("WATCHLIST", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(LoadingActivity.watchList);
+        editor.putString("LIST", json);
+        editor.apply();
+    }
+
 }

@@ -10,5 +10,6 @@
     android:layout_height="wrap_content"
     android:id="@+id/genre_name"
     android:text="Comedy"
+    style="@style/content"
     android:textSize="18sp"/>
 </LinearLayout>

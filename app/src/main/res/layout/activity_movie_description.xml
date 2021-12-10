@@ -61,6 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="26dp"
                 android:text="Genre"
+                style="@style/heading"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/vote_count_d" />
 
@@ -70,6 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="26dp"
                 android:text="Gallery"
+                style="@style/heading"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/genre_list" />
 
@@ -79,6 +81,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Average vote: 3.8"
+                android:textSize="16sp"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
@@ -96,15 +101,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="PRODUCED BY"
+                style="@style/content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/director_name"
-                android:layout_width="wrap_content"
+                style="@style/heading"
+                android:layout_width="225dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Lin-Manuel Miranda"
+                app:layout_constraintEnd_toStartOf="@+id/movie_poster_d"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -114,6 +122,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="26dp"
                 android:text="12-05-2012"
+                style="@style/content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/director_name" />
 
@@ -123,17 +132,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="121 mins"
+                style="@style/content"
                 app:layout_constraintBottom_toBottomOf="@+id/release_date_d"
                 app:layout_constraintStart_toEndOf="@+id/release_date_d"
                 app:layout_constraintTop_toTopOf="@+id/release_date_d" />
 
             <Button
                 android:id="@+id/trailer_d"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Trailer"
+                android:text="Add to Watchlist"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/movie_poster_d"
+                app:layout_constraintEnd_toStartOf="@+id/movie_poster_d"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/release_date_d" />
 
@@ -154,6 +167,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="This is overview"
+                style="@style/content"
+                android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -164,6 +179,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="26dp"
                 android:text="Overview"
+                style="@style/heading"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/movie_poster_d" />
 
@@ -173,6 +189,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="26dp"
                 android:text="Ratings"
+                style="@style/heading"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/overview_d" />
 
@@ -193,6 +210,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Vote Count: 3045"
+                android:textSize="16sp"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
@@ -234,6 +254,7 @@
                 android:layout_marginTop="26dp"
                 android:id="@+id/textView11"
                 app:layout_constraintStart_toStartOf="parent"
+                style="@style/heading"
                 app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
                 android:text="Reviews"/>
 

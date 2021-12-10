@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="Karsten"
         android:textAlignment="textEnd"
-        android:textStyle="italic"
+        style="@style/heading"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,12 +26,13 @@
         android:layout_marginTop="10dp"
         android:text="Just best looking Hollywood movie ever made"
         android:textSize="16sp"
+        style="@style/content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ratings_sub" />
 
     <TextView
         android:id="@+id/ratings_sub"
-        style="@style/ratings"
+        style="@style/heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableRight="@drawable/ic_baseline_star_rate_24"

@@ -1,5 +1,6 @@
 package com.example.letterbox;
 
+import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
@@ -14,29 +15,32 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class LoadDataFromApi {
-    String load(String url) {
-        final String[] data = {""};
+    ApiListener listener;
+
+    public LoadDataFromApi(Context context) {
+        try{
+            listener = (ApiListener) context;
+        }catch(ClassCastException e) {
+            throw new ClassCastException(context.toString() + "Must implement ApiListener");
+        }
+    }
+
+    public interface ApiListener {
+        void send(String json, String type);
+    }
+    void load(String url, String type) {
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder().url(url).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                data[0] = "Failed";
+                listener.send("Failed", "");
             }
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                data[0] = response.body().string();
+                listener.send(response.body().string(), type);
             }
         });
-        while(true) {
-            if (data[0].equals("")) {
-                continue;
-            } else if (data[0].equals("Failed")) {
-                return data[0];
-            } else {
-                return data[0];
-            }
-        }
     }
 }
